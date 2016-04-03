@@ -46,7 +46,7 @@ VOLUME $GHOST_CONTENT
 
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY hosts /hosts
-RUN sudo cat /hosts >> /etc/hosts
+RUN cat /hosts >> /etc/hosts
 
 ENTRYPOINT ["/entrypoint.sh"]
 

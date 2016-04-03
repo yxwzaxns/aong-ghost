@@ -45,6 +45,9 @@ RUN mkdir -p "$GHOST_CONTENT" && chown -R user:user "$GHOST_CONTENT"
 VOLUME $GHOST_CONTENT
 
 COPY docker-entrypoint.sh /entrypoint.sh
+COPY hosts /hosts
+RUN sudo cat /hosts >> /etc/hosts
+
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 2368

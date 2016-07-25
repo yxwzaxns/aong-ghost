@@ -51,4 +51,4 @@ RUN cat /hosts >> /etc/hosts
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 2368
-CMD ["npm", "start"]
+CMD ["npm", "start","--production"]

@@ -1,4 +1,6 @@
-FROM node:4.2-slim
+# http://support.ghost.org/supported-node-versions/
+# https://github.com/nodejs/LTS
+FROM node:4-slim
 
 RUN groupadd user && useradd --create-home --home-dir /home/user -g user user
 
@@ -22,7 +24,7 @@ RUN set -x \
 ENV GHOST_SOURCE /usr/src/ghost
 WORKDIR $GHOST_SOURCE
 
-ENV GHOST_VERSION 0.7.8
+ENV GHOST_VERSION 0.8.0
 
 RUN buildDeps=' \
 		gcc \

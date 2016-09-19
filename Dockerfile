@@ -4,11 +4,6 @@ FROM node:4-slim
 
 RUN groupadd user && useradd --create-home --home-dir /home/user -g user user
 
-RUN apt-get update && apt-get install -y \
-		ca-certificates \
-		wget \
-	--no-install-recommends && rm -rf /var/lib/apt/lists/*
-
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.7
 RUN set -x \
@@ -24,7 +19,7 @@ RUN set -x \
 ENV GHOST_SOURCE /usr/src/ghost
 WORKDIR $GHOST_SOURCE
 
-ENV GHOST_VERSION 0.9.0
+ENV GHOST_VERSION 0.11.0
 
 RUN buildDeps=' \
 		gcc \

@@ -41,6 +41,13 @@ ENV GHOST_CONTENT /var/lib/ghost
 RUN mkdir -p "$GHOST_CONTENT" && chown -R user:user "$GHOST_CONTENT"
 VOLUME $GHOST_CONTENT
 
+# add qn-store
+RUN mkdir -p "$GHOST_CONTENT"/storage/qn-store
+RUN git clone https://github.com/Minwe/qn-store.git "$GHOST_CONTENT"/storage/qn-store
+WORKDIR "$GHOST_CONTENT"/storage/qn-store
+RUN npm install --production
+
+WORKDIR $GHOST_SOURCE
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY hosts /hosts
 RUN cat /hosts >> /etc/hosts

@@ -33,6 +33,7 @@ RUN buildDeps=' \
 	&& unzip ghost.zip \
 	&& wget -O qn-store.zip https://github.com/minwe/qn-store/archive/master.zip \
 	&& unzip qn-store.zip \
+	&& npm install --save bluebird \
 	&& npm install --production \
 	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps \
 	&& rm ghost.zip \

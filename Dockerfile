@@ -45,8 +45,8 @@ VOLUME $GHOST_CONTENT
 
 # add qn-store
 RUN mkdir -p "$GHOST_CONTENT"/storage/qn-store
-RUN ll "$GHOST_CONTENT"
-RUN ll "$GHOST_CONTENT"/storage
+RUN ls -l "$GHOST_CONTENT"
+RUN ls -l "$GHOST_CONTENT"/storage
 RUN mv "$GHOST_SOURCE"/qn-store-master/* "$GHOST_CONTENT"/storage/qn-store/
 WORKDIR "$GHOST_CONTENT"/storage/qn-store
 RUN npm install --production

@@ -1,0 +1,6 @@
+myblog:
+  image: daocloud.io/yxwzaxns/ghost:latest
+  ports:
+   - "2368"
+  environment:
+    - NODE_ENV=production

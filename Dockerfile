@@ -43,8 +43,9 @@ VOLUME $GHOST_CONTENT
 
 # add qn-store
 RUN mkdir -p "$GHOST_CONTENT"/storage/qn-store
-RUN git clone https://github.com/Minwe/qn-store.git "$GHOST_CONTENT"/storage/qn-store
 WORKDIR "$GHOST_CONTENT"/storage/qn-store
+RUN wget -O qn-store.zip https://github.com/minwe/qn-store/archive/master.zip \
+		&& unzip qn-store.zip
 RUN npm install --production
 
 WORKDIR $GHOST_SOURCE

@@ -40,6 +40,9 @@ RUN buildDeps=' \
 	&& npm cache clean \
 	&& rm -rf /tmp/npm*
 
+ENV GHOST_CONTENT /var/lib/ghost
+RUN mkdir -p "$GHOST_CONTENT" && chown -R user:user "$GHOST_CONTENT"
+VOLUME $GHOST_CONTENT
 
 # add qn-store
 RUN mkdir -p "$GHOST_SOURCE"/content/storage/qn-store
@@ -48,10 +51,6 @@ RUN mkdir -p "$GHOST_SOURCE"/content/storage/qn-store
 RUN mv "$GHOST_SOURCE"/qn-store-master/* "$GHOST_SOURCE"/content/storage/qn-store/
 WORKDIR "$GHOST_SOURCE"/content/storage/qn-store
 RUN npm install --production
-
-ENV GHOST_CONTENT /var/lib/ghost
-RUN mkdir -p "$GHOST_CONTENT" && chown -R user:user "$GHOST_CONTENT"
-VOLUME $GHOST_CONTENT
 
 
 WORKDIR $GHOST_SOURCE

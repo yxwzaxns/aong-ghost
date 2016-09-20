@@ -31,7 +31,7 @@ RUN buildDeps=' \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/* \
 	&& wget -O ghost.zip "https://ghost.org/archives/ghost-${GHOST_VERSION}.zip" \
 	&& unzip ghost.zip \
-	&& wget -O qn-store.zip https://github.com/minwe/qn-store/archive/master.zip \
+	&& wget -O qn-store.zip https://github.com/yxwzaxns/aong-ghost/archive/master.zip \
 	&& unzip qn-store.zip \
 	&& npm install --save bluebird \
 	&& npm install --production \
@@ -40,9 +40,6 @@ RUN buildDeps=' \
 	&& npm cache clean \
 	&& rm -rf /tmp/npm*
 
-ENV GHOST_CONTENT /var/lib/ghost
-RUN mkdir -p "$GHOST_CONTENT" && chown -R user:user "$GHOST_CONTENT"
-VOLUME $GHOST_CONTENT
 
 # add qn-store
 RUN mkdir -p "$GHOST_SOURCE"/content/storage/qn-store
@@ -51,6 +48,11 @@ RUN mkdir -p "$GHOST_SOURCE"/content/storage/qn-store
 RUN mv "$GHOST_SOURCE"/qn-store-master/* "$GHOST_SOURCE"/content/storage/qn-store/
 WORKDIR "$GHOST_SOURCE"/content/storage/qn-store
 RUN npm install --production
+
+ENV GHOST_CONTENT /var/lib/ghost
+RUN mkdir -p "$GHOST_CONTENT" && chown -R user:user "$GHOST_CONTENT"
+VOLUME $GHOST_CONTENT
+
 
 WORKDIR $GHOST_SOURCE
 COPY docker-entrypoint.sh /entrypoint.sh

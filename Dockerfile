@@ -33,7 +33,6 @@ RUN buildDeps=' \
 	&& unzip ghost.zip \
 	&& wget -O qn-store.zip https://github.com/yxwzaxns/qn-store/archive/master.zip \
 	&& unzip qn-store.zip \
-	&& npm install --save bluebird \
 	&& npm install --production \
 	&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps \
 	&& rm ghost.zip \
@@ -46,8 +45,6 @@ VOLUME $GHOST_CONTENT
 
 # add qn-store
 RUN mkdir -p "$GHOST_SOURCE"/content/storage/qn-store
-#RUN ls -l "$GHOST_CONTENT"
-RUN ls -l "$GHOST_SOURCE"
 RUN mv "$GHOST_SOURCE"/qn-store-master/* "$GHOST_SOURCE"/content/storage/qn-store/
 WORKDIR "$GHOST_SOURCE"/content/storage/qn-store
 RUN npm install --production

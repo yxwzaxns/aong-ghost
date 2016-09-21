@@ -19,3 +19,16 @@ storage: {
 },
 
 ```
+# Example
+
+This is a docker-compose.yml
+```
+myblog:
+  image: daocloud.io/yxwzaxns/ghost:latest
+  ports:
+   - "2368"
+  envrionment:
+   - PROTO_TYPE=https
+  volumes:
+    - "/root/docker:/var/lib/ghost"
+```

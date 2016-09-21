@@ -53,7 +53,6 @@ RUN npm install --production
 WORKDIR $GHOST_SOURCE
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY hosts /hosts
-RUN cat /hosts >> /etc/hosts
 
 ENTRYPOINT ["/entrypoint.sh"]
 

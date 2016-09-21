@@ -3,13 +3,14 @@ set -e
 
 if [[ "$*" == npm*start* ]]; then
 	baseDir="$GHOST_SOURCE/content"
-	for dir in "$baseDir"/*/ "$baseDir"/themes/*/; do
-		targetDir="$GHOST_CONTENT/${dir#$baseDir/}"
-		mkdir -p "$targetDir"
-		if [ -z "$(ls -A "$targetDir")" ]; then
-			tar -c --one-file-system -C "$dir" . | tar xC "$targetDir"
-		fi
-	done
+	cp -R "$baseDir"/* "$GHOST_CONTENT"/
+	# for dir in "$baseDir"/*/ "$baseDir"/themes/*/ ; do
+	# 	targetDir="$GHOST_CONTENT/${dir#$baseDir/}"
+	# 	mkdir -p "$targetDir"
+	# 	if [ -z "$(ls -A "$targetDir")" ]; then
+	# 		tar -c --one-file-system -C "$dir" . | tar xC "$targetDir"
+	# 	fi
+	# done
 
 	if [ ! -e "$GHOST_CONTENT/config.js" ]; then
 		sed -r '

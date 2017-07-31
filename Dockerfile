@@ -1,5 +1,11 @@
 FROM node:6.11-alpine
 
+RUN apk add --no-cache 'su-exec>=0.2'
+
+RUN apk add --no-cache \
+# add "bash" for "[["
+		bash
+
 RUN mkdir /ghost
 
 ENV GHOST_VERSION 1.1.0

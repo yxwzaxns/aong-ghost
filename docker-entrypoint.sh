@@ -20,6 +20,7 @@ if [[ "$*" == node*index.js* ]]; then
 
 		if [[ ! -f "$GHOST_CONTENT/config.production.json" ]];then
 			mv config.production.json.default "$GHOST_CONTENT/config.production.json"
+			ln -sf "$GHOST_CONTENT/config.production.json" "$GHOST_SOURCE/config.production.json"
 		fi
 		knex-migrator init
 		touch "$GHOST_SOURCE/installed"

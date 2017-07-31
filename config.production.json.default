@@ -1,5 +1,5 @@
 {
-    "url": "localhost",
+    "url": "http://aong.cn",
     "database": {
         "client": "sqlite3",
         "connection": {

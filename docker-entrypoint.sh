@@ -18,10 +18,10 @@ if [[ "$*" == node*index.js* ]]; then
 		mkdir "$GHOST_CONTENT/themes"
 		fi
 
-		knex-migrator init
 		if [[ ! -f "$GHOST_CONTENT/config.production.json" ]];then
 			mv config.production.json.default "$GHOST_CONTENT/config.production.json"
 		fi
+		knex-migrator init
 		touch "$GHOST_SOURCE/installed"
 	else
 		echo "not need to init ghost, start up ghost"

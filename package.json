@@ -1,0 +1,15 @@
+{
+  "name": "aong-blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aong",
+  "license": "MIT",
+  "dependencies": {
+    "ghost": "^1.0.0",
+    "sqlite3": "^3.1.8"
+  }
+}

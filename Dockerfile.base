@@ -1,0 +1,14 @@
+FROM node:6.5
+
+RUN mkdir /ghost
+
+ENV GHOST_VERSION 1.1.0
+ENV GHOST_SOURCE /ghost
+ENV GHOST_CONTENT /ghost/content
+
+COPY ./ /ghost/
+WORKDIR $GHOST_SOURCE
+
+RUN npm install -g knex-migrator --registry=https://registry.npm.taobao.org
+RUN npm install ghost@1.0.0 --save --registry=https://registry.npm.taobao.org
+RUN npm install sqlite3 --save --registry=https://registry.npm.taobao.org

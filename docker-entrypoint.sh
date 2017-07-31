@@ -1,31 +1,32 @@
 #!/bin/bash
 set -e
+echo "start check up status"
 
-if [[ "$*" == npm*start* ]]; then
-	baseDir="$GHOST_SOURCE/content"
-	cp -R "$baseDir"/* "$GHOST_CONTENT"/
-	# for dir in "$baseDir"/*/ "$baseDir"/themes/*/ ; do
-	# 	targetDir="$GHOST_CONTENT/${dir#$baseDir/}"
-	# 	mkdir -p "$targetDir"
-	# 	if [ -z "$(ls -A "$targetDir")" ]; then
-	# 		tar -c --one-file-system -C "$dir" . | tar xC "$targetDir"
-	# 	fi
-	# done
+if [[ "$*" == node*index.js* ]]; then
+	if [[ ! -f "$GHOST_SOURCE/installed" ]]; then
+		echo "first start ghost, init ..."
+		#check if the folder is null
+		count=`ls $GHOST_CONTENT | wc -w`
+		if [ "$count" -gt "0" ];then
+		echo "this folder have $count files"
+		exit 1
+		else
+		echo "content folder is empty"
+		mkdir "$GHOST_CONTENT/data"
+		mkdir "$GHOST_CONTENT/logs"
+		mkdir "$GHOST_CONTENT/images"
+		mkdir "$GHOST_CONTENT/themes"
+		fi
 
-	if [ ! -e "$GHOST_CONTENT/config.js" ]; then
-		sed -r '
-			s/127\.0\.0\.1/0.0.0.0/g;
-			s!path.join\(__dirname, (.)/content!path.join(process.env.GHOST_CONTENT, \1!g;
-		' "$GHOST_SOURCE/config.example.js" > "$GHOST_CONTENT/config.js"
+		knex-migrator init
+		if [[ ! -f "$GHOST_CONTENT/config.production.json" ]];then
+			mv config.production.json.default "$GHOST_CONTENT/config.production.json"
+		fi
+		touch "$GHOST_SOURCE/installed"
+	else
+		echo "not need to init ghost, start up ghost"
 	fi
-
-	ln -sf "$GHOST_CONTENT/config.js" "$GHOST_SOURCE/config.js"
-
-	chown -R user "$GHOST_CONTENT"
-
-	cat /hosts >> /etc/hosts
-
-	set -- gosu user "$@"
+	ln -sf "$GHOST_CONTENT/config.production.json" "$GHOST_SOURCE/config.production.json"
 fi
 
 exec "$@"

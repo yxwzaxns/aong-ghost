@@ -1,6 +1,13 @@
-myblog:
-  image: daocloud.io/yxwzaxns/ghost:latest
-  ports:
-   - "2368"
-  volumes:
-    - "/root/docker:/var/lib/ghost"
+version: '2'
+services:
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: blog:dev
+    ports:
+     - "2368:2368"
+    environment:
+     - NODE_ENV=production
+    volumes:
+     - "xx:/ghost/content"

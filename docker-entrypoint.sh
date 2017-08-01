@@ -3,7 +3,7 @@ set -e
 echo "start check up status"
 
 if [[ "$*" == node*index.js* ]]; then
-	if [[ ! -f "$GHOST_SOURCE/installed" ]]; then
+	if [[ ! -f "$GHOST_CONTENT/installed" ]]; then
 		echo "first start ghost, init ..."
 		#check if the folder is null
 		count=`ls $GHOST_CONTENT | wc -w`
@@ -23,7 +23,7 @@ if [[ "$*" == node*index.js* ]]; then
 			ln -sf "$GHOST_CONTENT/config.production.json" "$GHOST_SOURCE/config.production.json"
 		fi
 		knex-migrator init
-		touch "$GHOST_SOURCE/installed"
+		touch "$GHOST_CONTENT/installed"
 	else
 		echo "not need to init ghost, start up ghost"
 	fi

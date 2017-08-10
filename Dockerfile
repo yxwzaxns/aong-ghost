@@ -8,7 +8,7 @@ RUN apk add --no-cache \
 
 RUN mkdir /ghost
 
-ENV GHOST_VERSION 1.1.0
+ENV GHOST_VERSION 1.5.1
 ENV GHOST_SOURCE /ghost
 ENV GHOST_CONTENT /ghost/content
 
@@ -16,7 +16,7 @@ COPY ./ /ghost/
 WORKDIR $GHOST_SOURCE
 
 RUN npm install -g knex-migrator
-RUN npm install ghost@1.1.0 --save
+RUN npm install "ghost@$GHOST_VERSION" --save
 RUN npm install sqlite3 --save
 
 COPY docker-entrypoint.sh /entrypoint.sh

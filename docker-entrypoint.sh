@@ -26,6 +26,7 @@ if [[ "$*" == node*index.js* ]]; then
 		touch "$GHOST_CONTENT/installed"
 	else
 		echo "not need to init ghost, start up ghost"
+		knex-migrator migrate
 	fi
 	ln -sf "$GHOST_CONTENT/config.production.json" "$GHOST_SOURCE/config.production.json"
 fi

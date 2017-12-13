@@ -8,7 +8,7 @@ RUN apk add --no-cache \
 
 RUN mkdir /ghost
 
-ENV GHOST_VERSION 1.14.0
+ENV GHOST_VERSION 1.18.4
 ENV GHOST_SOURCE /ghost
 ENV GHOST_CONTENT /ghost/content
 

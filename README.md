@@ -54,3 +54,4 @@ services:
     volumes:
       - "/root/docker:/var/lib/ghost"
 ```
+# License
